@@ -50,6 +50,20 @@
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+
+  /* FoxRed Brand Colors */
+  --brand-accent: #E34234;
+  --brand-accent-pressed: #C13525;
+  --brand-accent-text: #F5F5DC;
+
+  /* Warm Light Theme (Danki-inspired) */
+  --warm-background: #F5F0E6;
+  --warm-background-secondary: #EDE8DC;
+  --warm-surface: #FFFFFF;
+  --warm-ink: #2C2C2C;
+  --warm-ink-medium: #4A4A4A;
+  --warm-ink-light: #787878;
+  --warm-border: #D4CFC3;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);

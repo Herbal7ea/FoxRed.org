@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fox Red",
-  description: "Fox Red",
+  title: "Jon Bott | Developer & Creative",
+  description: "Personal portfolio of Jon Bott - Developer, iOS app creator, and photographer. Explore my projects including Danki and FoxFoto.",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
