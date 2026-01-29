@@ -99,7 +99,8 @@ export function HeroSection() {
             size="lg"
             className="bg-[var(--brand-accent-text)] text-[var(--brand-accent)] hover:bg-white"
           >
-            <a href="#projects">View Projects</a>
+            {/* Primary CTA button - links to About section */}
+            <a href="#about">About Me</a>
           </Button>
           <Button
             asChild
