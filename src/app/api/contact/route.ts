@@ -54,10 +54,22 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
 
-    // Forward to Web3Forms
+    // Convert FormData to JSON object for reliable server-to-server forwarding
+    const jsonData: Record<string, string> = {};
+    for (const [key, value] of formData.entries()) {
+      if (typeof value === "string") {
+        jsonData[key] = value;
+      }
+    }
+
+    // Forward to Web3Forms as JSON
     const response = await fetch(WEB3FORMS_URL, {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(jsonData),
     });
 
     const data = await response.json();
