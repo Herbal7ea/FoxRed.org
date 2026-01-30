@@ -8,4 +8,4 @@
 - ✅ [Done] Change hero "View Projects" button to "About Me" linking to #about section
 
 ## Thread 2
-- 🟡 Add rate limiting to contact form (1 submission per 2 minutes)
+- ✅ [Done] Add rate limiting to contact form (1 submission per 2 minutes)
