@@ -1,19 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Script from "next/script";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-
-declare global {
-  interface Window {
-    hcaptcha?: {
-      reset: () => void;
-    };
-  }
-}
 
 interface ContactFormProps {
   variant?: "light" | "dark";
@@ -22,13 +13,6 @@ interface ContactFormProps {
 export function ContactForm({ variant = "light" }: ContactFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [hcaptchaLoaded, setHcaptchaLoaded] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.hcaptcha) {
-      setHcaptchaLoaded(true);
-    }
-  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -49,9 +33,6 @@ export function ContactForm({ variant = "light" }: ContactFormProps) {
       if (data.success) {
         setStatus("success");
         form.reset();
-        if (window.hcaptcha) {
-          window.hcaptcha.reset();
-        }
       } else {
         setStatus("error");
         setErrorMessage(data.message || "Something went wrong. Please try again.");
@@ -72,13 +53,6 @@ export function ContactForm({ variant = "light" }: ContactFormProps) {
 
   return (
     <>
-      <Script
-        src="https://web3forms.com/client/script.js"
-        async
-        defer
-        onLoad={() => setHcaptchaLoaded(true)}
-      />
-
       {status === "success" ? (
         <div className="text-center">
           <p className={`mb-4 ${isDark ? "text-green-300" : "text-green-600"}`}>
@@ -142,20 +116,13 @@ export function ContactForm({ variant = "light" }: ContactFormProps) {
             />
           </div>
 
-          {/* hCaptcha widget */}
-          <div
-            className="h-captcha"
-            data-captcha="true"
-            data-theme={isDark ? "dark" : "light"}
-          />
-
           {status === "error" && (
             <p className={`text-sm ${isDark ? "text-red-300" : "text-red-600"}`}>{errorMessage}</p>
           )}
 
           <Button
             type="submit"
-            disabled={status === "submitting" || !hcaptchaLoaded}
+            disabled={status === "submitting"}
             className={`w-full ${isDark
               ? "bg-[var(--brand-accent-text)] text-[var(--brand-accent)] hover:bg-white"
               : "bg-[var(--brand-accent)] hover:bg-[var(--brand-accent-pressed)] text-white"
